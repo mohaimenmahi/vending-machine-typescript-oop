@@ -51,6 +51,38 @@ export class Money {
     this.setStaticArray(list)
   }
 
+  public removeConfigMoney(code: string): boolean {
+    let list = this.getMoneyList();
+
+    let index = list.findIndex((item: any) => 
+      this.convertString(item) === code.toUpperCase()
+    )
+
+    if(index >= 0) {
+      list[index].count = 0;
+      this.setStaticArray(list);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public upateMoney(code: string, count: number): any {
+    let list = this.getMoneyList();
+
+    let index = list.findIndex((item: any) => 
+      this.convertString(item) === code.toUpperCase()
+    )
+
+    if(index >= 0) {
+      list[index].count = count;
+      this.setStaticArray(list)
+      return list[index];
+    } else {
+      return null;
+    }
+  }
+
   public insertMoney(code: string): any {
     let list = this.getMoneyList();
 
@@ -61,7 +93,9 @@ export class Money {
     if(index >= 0) {
       list[index].count += 1;
       this.setStaticArray(list)
-      return list;
+      return list[index];
+    } else {
+      return null;
     }
   }
 
@@ -97,5 +131,58 @@ export class Money {
       return false;
     }
   }
+
+}
+
+export function init() {
+  let m = Money.getMoneyInstance();
+
+  let m1 = new Object({
+    composition: "STEEL",
+    color: 'SILVER',
+    obverse: "EDUCATION",
+    reverse: "SHAPLA",
+    value: 2,
+    count: 0,
+    type: "coin"
+  })
+  
+  m.addConfigMoney(m1)
+
+  let m2 = new Object({
+    composition: "STEEL",
+    color: 'SILVER',
+    obverse: "JAMUNA",
+    reverse: "SHAPLA",
+    value: 5,
+    count: 0,
+    type: "coin"
+  })
+
+  m.addConfigMoney(m2);
+
+  let m3 = new Object({
+    composition: "PAPER",
+    color: "PINK",
+    obverse: "BB",
+    reverse: "BMM",
+    value: 10,
+    count: 0,
+    type: "note"
+  });
+
+  m.addConfigMoney(m3);
+
+  let m4 = new Object({
+    composition: "PAPER",
+    color: "GREEN",
+    obverse: "BB",
+    reverse: "SDM",
+    value: 20,
+    count: 0,
+    type: "note"
+  });
+
+  m.addConfigMoney(m4);
 
 }

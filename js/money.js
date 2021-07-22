@@ -37,13 +37,40 @@ class Money {
         }
         this.setStaticArray(list);
     }
+    removeConfigMoney(code) {
+        let list = this.getMoneyList();
+        let index = list.findIndex((item) => this.convertString(item) === code.toUpperCase());
+        if (index >= 0) {
+            list[index].count = 0;
+            this.setStaticArray(list);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    upateMoney(code, count) {
+        let list = this.getMoneyList();
+        let index = list.findIndex((item) => this.convertString(item) === code.toUpperCase());
+        if (index >= 0) {
+            list[index].count = count;
+            this.setStaticArray(list);
+            return list[index];
+        }
+        else {
+            return null;
+        }
+    }
     insertMoney(code) {
         let list = this.getMoneyList();
         let index = list.findIndex((item) => this.convertString(item) === code.toUpperCase());
         if (index >= 0) {
             list[index].count += 1;
             this.setStaticArray(list);
-            return list;
+            return list[index];
+        }
+        else {
+            return null;
         }
     }
     returnMoney(value) {
@@ -78,7 +105,7 @@ class Money {
 }
 exports.Money = Money;
 Money.moneyList = [];
-function client() {
+function init() {
     let m = Money.getMoneyInstance();
     let m1 = new Object({
         composition: "STEEL",
@@ -86,7 +113,7 @@ function client() {
         obverse: "EDUCATION",
         reverse: "SHAPLA",
         value: 2,
-        count: 10,
+        count: 0,
         type: "coin"
     });
     m.addConfigMoney(m1);
@@ -96,7 +123,7 @@ function client() {
         obverse: "JAMUNA",
         reverse: "SHAPLA",
         value: 5,
-        count: 10,
+        count: 0,
         type: "coin"
     });
     m.addConfigMoney(m2);
@@ -106,15 +133,19 @@ function client() {
         obverse: "BB",
         reverse: "BMM",
         value: 10,
-        count: 10,
+        count: 0,
         type: "note"
     });
     m.addConfigMoney(m3);
-    console.log("Money after Configure: ", m.getMoneyList());
-    let code = "STEEL-SILVER-JAMUNA-SHAPLA";
-    console.log("Money Inserted: ", m.insertMoney(code));
-    console.log("Money After Inserting: ", m.getMoneyList());
-    console.log("Money Returned: ", m.returnMoney(12));
-    console.log('Money After Return', m.getMoneyList());
+    let m4 = new Object({
+        composition: "PAPER",
+        color: "GREEN",
+        obverse: "BB",
+        reverse: "SDM",
+        value: 20,
+        count: 0,
+        type: "note"
+    });
+    m.addConfigMoney(m4);
 }
-client();
+exports.init = init;
