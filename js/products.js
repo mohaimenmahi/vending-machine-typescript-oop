@@ -9,7 +9,7 @@ class Product {
         }
         return Product.instance;
     }
-    static addConfigProduct(product) {
+    addConfigProduct(product) {
         let list = Product.productList;
         let index = list.findIndex((item) => item.code === product.code);
         if (index >= 0) {
@@ -19,7 +19,7 @@ class Product {
             Product.productList.push(product);
         }
     }
-    static removeProduct(code) {
+    removeProduct(code) {
         let list = Product.productList;
         let index = list.findIndex((item) => item.code === code);
         if (index >= 0) {
@@ -31,7 +31,7 @@ class Product {
             }
         }
     }
-    static getProduct(code) {
+    getProduct(code) {
         let list = Product.productList;
         let product = list.find((item) => {
             if (item.code === code) {
@@ -40,7 +40,7 @@ class Product {
         });
         return product;
     }
-    static getProductList() {
+    getProductList() {
         return Product.productList;
     }
 }

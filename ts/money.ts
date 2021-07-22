@@ -2,17 +2,19 @@
 
 export class Money {
   private static instance: Money;
-  private static moneyList: Money[];
+  static moneyList: Money[] = [];
 
-  protected composition: string;
-  protected color: string;
-  protected obverse: string;
-  protected reverse: string;
-  protected value: number;
-  protected count: number;
-  protected type: string;
+  composition: string;
+  color: string;
+  obverse: string;
+  reverse: string;
+  value: number;
+  count: number;
+  type: string;
 
-  private constructor() {}
+  private constructor() {
+    
+  }
 
   public static getMoneyInstance(): Money {
     if(!Money.instance) {
@@ -22,7 +24,17 @@ export class Money {
     return Money.instance
   }
 
-  private static convertString(money: Money): string {
+  public static getMoneyList(): Money[] {
+    return Money.moneyList; 
+  }
+
+  public static setStaticArray(list: Money[]): void {
+    if(Money.instance) {
+      Money.moneyList = list
+    }
+  }
+
+  private static convertString(money: any): string {
     let code = money.composition.toUpperCase()
       +'-' 
       + money.color.toUpperCase() 
@@ -35,35 +47,38 @@ export class Money {
   }
 
   // admin will add the codes, value and count 
-  public static addConfigMoney(money: Money): void {
-    let list: Money[] = Money.moneyList;
+  public static addConfigMoney(money: any): void {
+    let list: Money[] = this.getMoneyList();
     
-    let index = list.findIndex((item: Money) => 
+    let index = list.findIndex((item: any) => 
       this.convertString(item) === this.convertString(money)
     )
 
     if(index >= 0) {
-      Money.moneyList[index].count += money.count;
+      list[index].count += money.count;
     } else {
-      Money.moneyList.push(money)
+      list.push(money)
     }
+
+    this.setStaticArray(list)
   }
 
   public static insertMoney(code: string): any {
-    let list: Money[] = Money.moneyList;
+    let list: Money[] = this.getMoneyList();
 
     let index = list.findIndex((item: Money) => 
       this.convertString(item) === code.toUpperCase()
     )
 
     if(index >= 0) {
-      Money.moneyList[index].count += 1;
-      return Money.moneyList[index];
+      list[index].count += 1;
+      this.setStaticArray(list)
+      return list;
     }
   }
 
   public static returnMoney(value: number): boolean {
-    let list: Money[] = Money.moneyList;
+    let list: Money[] = this.getMoneyList();
 
     list = list.sort(
       (a: Money, b: Money) => a.value < b.value ? -1 : 1
@@ -79,7 +94,7 @@ export class Money {
       if(i < 0) break;
       if(list[i].value > remain) i--;
       else {
-        let div = remain / list[i].value;
+        let div = Math.floor(remain / list[i].value);
         if(list[i].count >= div) {
           remain = remain % list[i].value;
           list[i].count -= div;
@@ -88,14 +103,63 @@ export class Money {
     }
 
     if(remain === 0) {
-      Money.moneyList = list;
+      this.setStaticArray(list);
       return true;
     } else {
       return false;
     }
   }
 
-  public static getMoneyList(): Money[] {
-    return Money.moneyList;
-  }
 }
+
+function client() {
+  let m1 = new Object({
+    composition: "STEEL",
+    color: 'SILVER',
+    obverse: "EDUCATION",
+    reverse: "SHAPLA",
+    value: 2,
+    count: 10,
+    type: "coin"
+  })
+  
+  Money.addConfigMoney(m1)
+
+  let m2 = new Object({
+    composition: "STEEL",
+    color: 'SILVER',
+    obverse: "JAMUNA",
+    reverse: "SHAPLA",
+    value: 5,
+    count: 10,
+    type: "coin"
+  })
+
+  Money.addConfigMoney(m2);
+
+  let m3 = new Object({
+    composition: "PAPER",
+    color: "PINK",
+    obverse: "BB",
+    reverse: "BMM",
+    value: 10,
+    count: 10,
+    type: "note"
+  });
+
+  Money.addConfigMoney(m3);
+
+  console.log("Money after Configure: ", Money.getMoneyList());
+
+  let code = "STEEL-SILVER-JAMUNA-SHAPLA"
+
+  console.log("Money Inserted: ", Money.insertMoney(code));
+
+  console.log("Money After Inserting: ",Money.getMoneyList());
+
+  console.log("Money Returned: ", Money.returnMoney(12));
+
+  console.log('Money After Return', Money.getMoneyList())
+}
+
+client()

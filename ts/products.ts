@@ -20,7 +20,7 @@ export class Product {
     return Product.instance
   }
 
-  public static addConfigProduct(product: Product): void {
+  public addConfigProduct(product: Product): void {
     let list: Product[] = Product.productList;
 
     let index = list.findIndex((item: Product) => item.code === product.code)
@@ -33,7 +33,7 @@ export class Product {
     }
   }
 
-  public static removeProduct(code: string): void {
+  public removeProduct(code: string): void {
     let list: Product[] = Product.productList;
 
     let index = list.findIndex((item:Product) => item.code === code)
@@ -47,7 +47,7 @@ export class Product {
     }
   }
 
-  public static getProduct(code: string): Product {
+  public getProduct(code: string): Product {
     let list: Product[] = Product.productList;
 
     let product = list.find((item: Product) => {
@@ -59,7 +59,7 @@ export class Product {
     return product;
   }
 
-  public static getProductList(): Product[] {
+  public getProductList(): Product[] {
     return Product.productList;
   }
 }
