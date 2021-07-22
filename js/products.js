@@ -9,26 +9,34 @@ class Product {
         }
         return Product.instance;
     }
+    getProductList() {
+        return Product.productList;
+    }
+    setProductList(list) {
+        Product.productList = list;
+    }
     addConfigProduct(product) {
-        let list = Product.productList;
+        let list = this.getProductList();
         let index = list.findIndex((item) => item.code === product.code);
         if (index >= 0) {
-            Product.productList[index].count += 1;
+            list[index].count += 1;
         }
         else {
-            Product.productList.push(product);
+            list.push(product);
         }
+        this.setProductList(list);
     }
     removeProduct(code) {
         let list = Product.productList;
         let index = list.findIndex((item) => item.code === code);
         if (index >= 0) {
-            if (Product.productList[index].count > 1) {
-                Product.productList[index].count -= 1;
+            if (list[index].count > 1) {
+                list[index].count -= 1;
             }
             else {
-                Product.productList = Product.productList.filter((item) => item.code !== code);
+                list = list.filter((item) => item.code !== code);
             }
+            this.setProductList(list);
         }
     }
     getProduct(code) {
@@ -40,8 +48,6 @@ class Product {
         });
         return product;
     }
-    getProductList() {
-        return Product.productList;
-    }
 }
 exports.Product = Product;
+Product.productList = [];

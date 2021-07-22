@@ -2,23 +2,20 @@
 // singleton for money
 Object.defineProperty(exports, "__esModule", { value: true });
 class Money {
-    constructor() {
-    }
+    constructor() { }
     static getMoneyInstance() {
         if (!Money.instance) {
             Money.instance = new Money();
         }
         return Money.instance;
     }
-    static getMoneyList() {
+    getMoneyList() {
         return Money.moneyList;
     }
-    static setStaticArray(list) {
-        if (Money.instance) {
-            Money.moneyList = list;
-        }
+    setStaticArray(list) {
+        Money.moneyList = list;
     }
-    static convertString(money) {
+    convertString(money) {
         let code = money.composition.toUpperCase()
             + '-'
             + money.color.toUpperCase()
@@ -29,7 +26,7 @@ class Money {
         return code;
     }
     // admin will add the codes, value and count 
-    static addConfigMoney(money) {
+    addConfigMoney(money) {
         let list = this.getMoneyList();
         let index = list.findIndex((item) => this.convertString(item) === this.convertString(money));
         if (index >= 0) {
@@ -40,7 +37,7 @@ class Money {
         }
         this.setStaticArray(list);
     }
-    static insertMoney(code) {
+    insertMoney(code) {
         let list = this.getMoneyList();
         let index = list.findIndex((item) => this.convertString(item) === code.toUpperCase());
         if (index >= 0) {
@@ -49,7 +46,7 @@ class Money {
             return list;
         }
     }
-    static returnMoney(value) {
+    returnMoney(value) {
         let list = this.getMoneyList();
         list = list.sort((a, b) => a.value < b.value ? -1 : 1);
         let len = list.length;
@@ -82,6 +79,7 @@ class Money {
 exports.Money = Money;
 Money.moneyList = [];
 function client() {
+    let m = Money.getMoneyInstance();
     let m1 = new Object({
         composition: "STEEL",
         color: 'SILVER',
@@ -91,7 +89,7 @@ function client() {
         count: 10,
         type: "coin"
     });
-    Money.addConfigMoney(m1);
+    m.addConfigMoney(m1);
     let m2 = new Object({
         composition: "STEEL",
         color: 'SILVER',
@@ -101,7 +99,7 @@ function client() {
         count: 10,
         type: "coin"
     });
-    Money.addConfigMoney(m2);
+    m.addConfigMoney(m2);
     let m3 = new Object({
         composition: "PAPER",
         color: "PINK",
@@ -111,12 +109,12 @@ function client() {
         count: 10,
         type: "note"
     });
-    Money.addConfigMoney(m3);
-    console.log("Money after Configure: ", Money.getMoneyList());
+    m.addConfigMoney(m3);
+    console.log("Money after Configure: ", m.getMoneyList());
     let code = "STEEL-SILVER-JAMUNA-SHAPLA";
-    console.log("Money Inserted: ", Money.insertMoney(code));
-    console.log("Money After Inserting: ", Money.getMoneyList());
-    console.log("Money Returned: ", Money.returnMoney(12));
-    console.log('Money After Return', Money.getMoneyList());
+    console.log("Money Inserted: ", m.insertMoney(code));
+    console.log("Money After Inserting: ", m.getMoneyList());
+    console.log("Money Returned: ", m.returnMoney(12));
+    console.log('Money After Return', m.getMoneyList());
 }
 client();

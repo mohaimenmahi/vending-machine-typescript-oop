@@ -2,19 +2,9 @@
 
 export class Money {
   private static instance: Money;
-  static moneyList: Money[] = [];
+  static moneyList = [];
 
-  composition: string;
-  color: string;
-  obverse: string;
-  reverse: string;
-  value: number;
-  count: number;
-  type: string;
-
-  private constructor() {
-    
-  }
+  private constructor() {}
 
   public static getMoneyInstance(): Money {
     if(!Money.instance) {
@@ -24,17 +14,15 @@ export class Money {
     return Money.instance
   }
 
-  public static getMoneyList(): Money[] {
+  public getMoneyList(): any {
     return Money.moneyList; 
   }
 
-  public static setStaticArray(list: Money[]): void {
-    if(Money.instance) {
-      Money.moneyList = list
-    }
+  public setStaticArray(list: any): void {
+    Money.moneyList = list
   }
 
-  private static convertString(money: any): string {
+  private convertString(money: any): string {
     let code = money.composition.toUpperCase()
       +'-' 
       + money.color.toUpperCase() 
@@ -47,8 +35,8 @@ export class Money {
   }
 
   // admin will add the codes, value and count 
-  public static addConfigMoney(money: any): void {
-    let list: Money[] = this.getMoneyList();
+  public addConfigMoney(money: any): void {
+    let list = this.getMoneyList();
     
     let index = list.findIndex((item: any) => 
       this.convertString(item) === this.convertString(money)
@@ -63,10 +51,10 @@ export class Money {
     this.setStaticArray(list)
   }
 
-  public static insertMoney(code: string): any {
-    let list: Money[] = this.getMoneyList();
+  public insertMoney(code: string): any {
+    let list = this.getMoneyList();
 
-    let index = list.findIndex((item: Money) => 
+    let index = list.findIndex((item: any) => 
       this.convertString(item) === code.toUpperCase()
     )
 
@@ -77,11 +65,11 @@ export class Money {
     }
   }
 
-  public static returnMoney(value: number): boolean {
-    let list: Money[] = this.getMoneyList();
+  public returnMoney(value: number): boolean {
+    let list = this.getMoneyList();
 
     list = list.sort(
-      (a: Money, b: Money) => a.value < b.value ? -1 : 1
+      (a: any, b: any) => a.value < b.value ? -1 : 1
     )
 
     let len = list.length;
@@ -113,6 +101,8 @@ export class Money {
 }
 
 function client() {
+  let m = Money.getMoneyInstance();
+
   let m1 = new Object({
     composition: "STEEL",
     color: 'SILVER',
@@ -123,7 +113,7 @@ function client() {
     type: "coin"
   })
   
-  Money.addConfigMoney(m1)
+  m.addConfigMoney(m1)
 
   let m2 = new Object({
     composition: "STEEL",
@@ -135,7 +125,7 @@ function client() {
     type: "coin"
   })
 
-  Money.addConfigMoney(m2);
+  m.addConfigMoney(m2);
 
   let m3 = new Object({
     composition: "PAPER",
@@ -147,19 +137,19 @@ function client() {
     type: "note"
   });
 
-  Money.addConfigMoney(m3);
+  m.addConfigMoney(m3);
 
-  console.log("Money after Configure: ", Money.getMoneyList());
+  console.log("Money after Configure: ", m.getMoneyList());
 
   let code = "STEEL-SILVER-JAMUNA-SHAPLA"
 
-  console.log("Money Inserted: ", Money.insertMoney(code));
+  console.log("Money Inserted: ", m.insertMoney(code));
 
-  console.log("Money After Inserting: ",Money.getMoneyList());
+  console.log("Money After Inserting: ",m.getMoneyList());
 
-  console.log("Money Returned: ", Money.returnMoney(12));
+  console.log("Money Returned: ", m.returnMoney(12));
 
-  console.log('Money After Return', Money.getMoneyList())
+  console.log('Money After Return', m.getMoneyList())
 }
 
 client()

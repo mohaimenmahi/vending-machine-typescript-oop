@@ -2,12 +2,8 @@
 
 export class Product {
   private static instance: Product;
-  private static productList: Product[];
+  static productList = [];
 
-  protected name: string;
-  protected price: number;
-  protected code: string;
-  protected count: number;
   protected category: string
 
   private constructor() {}
@@ -20,46 +16,54 @@ export class Product {
     return Product.instance
   }
 
-  public addConfigProduct(product: Product): void {
-    let list: Product[] = Product.productList;
+  public getProductList(): any {
+    return Product.productList;
+  }
 
-    let index = list.findIndex((item: Product) => item.code === product.code)
+  public setProductList(list: any) {
+    Product.productList = list;
+  }
+
+  public addConfigProduct(product: any): void {
+    let list = this.getProductList();
+
+    let index = list.findIndex((item: any) => item.code === product.code)
 
     if(index >= 0) {
-      Product.productList[index].count += 1;
+      list[index].count += 1;
     }
     else {
-      Product.productList.push(product)
+      list.push(product)
     }
+
+    this.setProductList(list);
   }
 
   public removeProduct(code: string): void {
-    let list: Product[] = Product.productList;
+    let list = Product.productList;
 
-    let index = list.findIndex((item:Product) => item.code === code)
+    let index = list.findIndex((item: any) => item.code === code)
 
     if(index >= 0) {
-      if(Product.productList[index].count > 1) {
-        Product.productList[index].count -= 1;
+      if(list[index].count > 1) {
+        list[index].count -= 1;
       } else {
-        Product.productList = Product.productList.filter((item: Product) => item.code !== code)
+        list = list.filter((item: any) => item.code !== code)
       }
+
+      this.setProductList(list)
     }
   }
 
-  public getProduct(code: string): Product {
-    let list: Product[] = Product.productList;
+  public getProduct(code: string): any {
+    let list = Product.productList;
 
-    let product = list.find((item: Product) => {
+    let product = list.find((item: any) => {
       if(item.code === code) {
         return item
       }
     })
 
     return product;
-  }
-
-  public getProductList(): Product[] {
-    return Product.productList;
   }
 }
