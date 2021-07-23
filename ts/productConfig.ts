@@ -2,6 +2,7 @@ import { State } from "./state";
 import {question} from 'readline-sync';
 import { Product } from "./products";
 import { AddProduct } from "./addProduct";
+import { isString, validConvert } from "./validator";
 
 export class ProductConfig extends State {
   public handleSelect(): string {
@@ -19,9 +20,18 @@ export class ProductConfig extends State {
 
     let code: string = question("Enter Product Code: ");
 
-    let remove = product.deleteProduct(code);
+    code = validConvert(code);
 
-    if(remove) console.log("Product Removed Successfully");
-    else console.log("No Such Products available in the system")
+    if(isString(code)) {
+      let remove = product.deleteProduct(code);
+
+      if(remove) console.log("Product Removed Successfully");
+      else console.log("No Such Products available in the system");
+
+    } else {
+      console.log("Input value is not valid")
+    }
+
+    this.context.transitionTo(new ProductConfig())
   }
 }

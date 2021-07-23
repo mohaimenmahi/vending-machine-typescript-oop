@@ -2,6 +2,7 @@ import { State } from "./state";
 import {question, questionInt} from 'readline-sync';
 import { Product } from "./products";
 import { ConfigMode } from "./configMode";
+import { isString, validConvert } from "./validator";
 
 export class AddProduct extends State {
   public handleSelect(): string {
@@ -14,31 +15,48 @@ export class AddProduct extends State {
     let product = Product.getProductInstance();
 
     let name: string = question("Product Name: ");
+    name = validConvert(name);
+
     let code: string = question("Product Code: ");
+    code = validConvert(code);
+
     let price: number = questionInt("Product Price: ");
     let count: number = questionInt("Product Count: ");
 
-    let p1 = new Object({
-      name: name,
-      price: price,
-      code: code,
-      count: count
-    });
+    if(isString(name) && isString(code)) {
+      let p1 = new Object({
+        name: name,
+        price: price,
+        code: code,
+        count: count
+      });
+  
+      product.addConfigProduct(p1);
+      
+      console.log("Product Added Successfully!")
+    } else {
+      console.log("Some Inputs are not valid. Please Try Again")
+    }
 
-    product.addConfigProduct(p1);
-
-    this.context.transitionTo(new ConfigMode())
+    this.context.transitionTo(new AddProduct())
   } 
 
   public handleB(): void {
     let product = Product.getProductInstance();
 
     let code: string = question("Product Code: ");
+    code = validConvert(code);
+
     let count: number = questionInt("Product Count: ");
     let price: number = questionInt("Product Price: ");
 
-    product.updateProduct(code, count, price);
+    if(isString(code)) {
+      product.updateProduct(code, count, price);
+      console.log("Product Updated Successfully")
+    } else {
+      console.log("Some Inputs are not valid. Please Try Again")
+    }
 
-    this.context.transitionTo(new ConfigMode())
+    this.context.transitionTo(new AddProduct())
   }
 }
