@@ -1,7 +1,7 @@
 import { State } from "./state";
 import {question} from 'readline-sync'
 import { Money } from "./money";
-import { AddMoney } from "./AddMoney";
+import { AddMoney } from "./addMoney";
 import { ConfigMode } from "./configMode";
 
 export class MoneyConfig extends State {
@@ -24,6 +24,6 @@ export class MoneyConfig extends State {
     if(remove) console.log("Money Removed successfully.")
     else console.log("Selected money is not available in System.")
 
-    this.context.transitionTo(new ConfigMode())
+    this.context.transitionTo(new MoneyConfig())
   }
 }

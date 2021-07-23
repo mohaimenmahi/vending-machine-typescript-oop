@@ -38,53 +38,43 @@ export class SaleMode extends State {
     let getProduct: any = product.getProduct(productCode);
 
     if(getProduct) {
-      let remove = product.removeProduct(productCode);
+      let remain = SaleMode.recieve - getProduct.price;
 
-      if(remove) {
-        console.log(`Please collect your "${remove.name}"`)
-
-        let remain = SaleMode.recieve - remove.price;
-
-        if(remain > 0) {
-          let returnMoney = money.returnMoney(remain);
-
-          if(returnMoney) {
-            console.log(`Please collect ${remain}Tk as change.`);
-            SaleMode.recieve = 0;
-            this.context.transitionTo(new SaleMode());
-          } else {
-            console.log("Notes/Coins are not available for make the change")
-            product.addConfigProduct(remove);
-            
-            let cashback = money.returnMoney(SaleMode.recieve);
-
-            if(cashback) {
-              console.log(`Please collect ${SaleMode.recieve}Tk.`)
-              SaleMode.recieve = 0;
-              this.context.transitionTo(new SaleMode)
-            }
-          }
-        } else if(remain < 0) {
-          console.log("Inserted money is not sufficient to parchase the selected product");
-          this.context.transitionTo(new SaleMode())
-        } else {
-          console.log("Thanks for using smart vending!")
-          SaleMode.recieve = 0;
-          this.context.transitionTo(new SaleMode());
-          //this.context.takeInput();
-        }
-        
-      } else {
-        console.log("Something went wrong. Please try later.")
-        let remain = SaleMode.recieve;
-
+      if(remain > 0) {
         let returnMoney = money.returnMoney(remain);
 
         if(returnMoney) {
-          console.log(`Please collect ${remain}Tk as return`);
+          console.log(`Please Collect your "${getProduct.name}"`)
+          console.log(`Please collect ${remain}Tk as change.`);
+          console.log("Thanks for using smart vending!")
           SaleMode.recieve = 0;
+          product.removeProduct(productCode);
           this.context.transitionTo(new SaleMode());
+        } else {
+          console.log("Notes/Coins are not available for make the change")
+          
+          let cashback = money.returnMoney(SaleMode.recieve);
+
+          if(cashback) {
+            console.log(`Please collect ${SaleMode.recieve}Tk.`)
+            SaleMode.recieve = 0;
+            this.context.transitionTo(new SaleMode())
+          }
         }
+      } else if(remain < 0) {
+        console.log("Inserted money is not sufficient to parchase the selected product");
+        let cashback = money.returnMoney(SaleMode.recieve);
+
+        if(cashback) {
+          console.log(`Please collect ${SaleMode.recieve}Tk.`)
+          SaleMode.recieve = 0;
+          this.context.transitionTo(new SaleMode())
+        }
+      } else {
+        console.log(`Please Collect your "${getProduct.name}"`)
+        console.log("Thanks for using smart vending!")
+        SaleMode.recieve = 0;
+        this.context.transitionTo(new SaleMode());
       }
     } else {
       console.log("Product is not available right now. Please try another.")
@@ -98,6 +88,5 @@ export class SaleMode extends State {
         this.context.transitionTo(new SaleMode());
       }
     }
-
   }
 }

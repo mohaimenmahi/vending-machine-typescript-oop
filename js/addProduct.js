@@ -13,8 +13,8 @@ class AddProduct extends state_1.State {
         let product = products_1.Product.getProductInstance();
         let name = readline_sync_1.question("Product Name: ");
         let code = readline_sync_1.question("Product Code: ");
-        let price = readline_sync_1.question("Product Price: ");
-        let count = readline_sync_1.question("Product Count: ");
+        let price = readline_sync_1.questionInt("Product Price: ");
+        let count = readline_sync_1.questionInt("Product Count: ");
         let p1 = new Object({
             name: name,
             price: price,
@@ -27,8 +27,8 @@ class AddProduct extends state_1.State {
     handleB() {
         let product = products_1.Product.getProductInstance();
         let code = readline_sync_1.question("Product Code: ");
-        let count = readline_sync_1.question("Product Count: ");
-        let price = readline_sync_1.question("Product Price: ");
+        let count = readline_sync_1.questionInt("Product Count: ");
+        let price = readline_sync_1.questionInt("Product Price: ");
         product.updateProduct(code, count, price);
         this.context.transitionTo(new configMode_1.ConfigMode());
     }

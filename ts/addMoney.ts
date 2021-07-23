@@ -1,5 +1,5 @@
 import { State } from "./state";
-import {question} from 'readline-sync'
+import {question, questionInt} from 'readline-sync'
 import { Money } from "./money";
 import { ConfigMode } from "./configMode";
 
@@ -17,8 +17,8 @@ export class AddMoney extends State {
     let color: string = question("Color: ");
     let obverse: string = question("Obverse: ");
     let reverse: string = question("Reverse: ");
-    let value: string = question("Value: ");
-    let count: string = question("Count: ");
+    let value: number = questionInt("Value: ");
+    let count: number = questionInt("Count: ");
 
     let money = Money.getMoneyInstance();
 
@@ -34,16 +34,16 @@ export class AddMoney extends State {
 
     money.addConfigMoney(m1)
 
-    this.context.transitionTo(new ConfigMode());
+    this.context.transitionTo(new AddMoney());
   }
 
   public handleB(): void {
     let money = Money.getMoneyInstance();
 
     let code: string = question("Enter Code: ");
-    let count: number = question("Enter Count: ");
+    let count: number = questionInt("Enter Count: ");
 
-    let isUpdate: any = money.upateMoney(code, count);
+    let isUpdate: any = money.updateMoney(code, count);
 
     if(isUpdate) {
       console.log("Money Index updated.")
@@ -51,6 +51,6 @@ export class AddMoney extends State {
       console.log("Selected money not found.")
     }
 
-    this.context.transitionTo(new ConfigMode())
+    this.context.transitionTo(new AddMoney())
   }
 }

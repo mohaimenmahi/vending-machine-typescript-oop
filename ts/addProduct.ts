@@ -1,5 +1,5 @@
 import { State } from "./state";
-import {question} from 'readline-sync';
+import {question, questionInt} from 'readline-sync';
 import { Product } from "./products";
 import { ConfigMode } from "./configMode";
 
@@ -15,8 +15,8 @@ export class AddProduct extends State {
 
     let name: string = question("Product Name: ");
     let code: string = question("Product Code: ");
-    let price: number = question("Product Price: ");
-    let count: number = question("Product Count: ");
+    let price: number = questionInt("Product Price: ");
+    let count: number = questionInt("Product Count: ");
 
     let p1 = new Object({
       name: name,
@@ -34,8 +34,8 @@ export class AddProduct extends State {
     let product = Product.getProductInstance();
 
     let code: string = question("Product Code: ");
-    let count: number = question("Product Count: ");
-    let price: number = question("Product Price: ");
+    let count: number = questionInt("Product Count: ");
+    let price: number = questionInt("Product Price: ");
 
     product.updateProduct(code, count, price);
 

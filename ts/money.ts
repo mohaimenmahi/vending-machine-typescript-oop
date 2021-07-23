@@ -1,5 +1,24 @@
 // singleton for money
 
+function calculateReturn(remain: number, list: any) {
+  let len = list.length;
+
+    let i = len - 1;
+
+    while(remain > 0) {
+      if(i < 0) break;
+      if(list[i].value > remain) i--;
+      else {
+        if(list[i].count > 0) {
+          remain -= list[i].value;
+          list[i].count -= 1;
+        } else i--;
+      }
+    }
+
+    return { remain, list }
+}
+
 export class Money {
   private static instance: Money;
   static moneyList = [];
@@ -19,6 +38,9 @@ export class Money {
   }
 
   public setStaticArray(list: any): void {
+    list = list.sort(
+      (a: any, b: any) => a.value < b.value ? -1 : 1
+    )
     Money.moneyList = list
   }
 
@@ -67,7 +89,7 @@ export class Money {
     }
   }
 
-  public upateMoney(code: string, count: number): any {
+  public updateMoney(code: string, count: number): any {
     let list = this.getMoneyList();
 
     let index = list.findIndex((item: any) => 
@@ -100,35 +122,33 @@ export class Money {
   }
 
   public returnMoney(value: number): boolean {
-    let list = this.getMoneyList();
+    let list = JSON.parse(JSON.stringify(this.getMoneyList()));
 
-    list = list.sort(
-      (a: any, b: any) => a.value < b.value ? -1 : 1
-    )
+    let retObj = calculateReturn(value, list)
 
-    let len = list.length;
-
-    let remain = value
-
-    let i = len - 1;
-
-    while(remain > 0) {
-      if(i < 0) break;
-      if(list[i].value > remain) i--;
-      else {
-        let div = Math.floor(remain / list[i].value);
-        if(list[i].count >= div) {
-          remain = remain % list[i].value;
-          list[i].count -= div;
-        } else i--;
-      }
-    }
+    let remain = retObj.remain;
+    let newList = retObj.list;
 
     if(remain === 0) {
-      this.setStaticArray(list);
+      this.setStaticArray(newList);
       return true;
     } else {
-      return false;
+      let reverseList = JSON.parse(JSON.stringify(this.getMoneyList()))
+      reverseList= reverseList.sort(
+        (a: any, b: any) => a.value < b.value ? 1 : -1
+      )
+
+      let newRet = calculateReturn(value, reverseList);
+
+      let newRem = newRet.remain;
+      let newRetList = newRet.list;
+
+      if(newRem === 0) {
+        this.setStaticArray(newRetList)
+        return true
+      } else {
+        return false;
+      }
     }
   }
 

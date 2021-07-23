@@ -3,12 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const state_1 = require("./state");
 const readline_sync_1 = require("readline-sync");
 const products_1 = require("./products");
+const addProduct_1 = require("./addProduct");
 class ProductConfig extends state_1.State {
     handleSelect() {
         let input = readline_sync_1.question("Product Config Mode (A = Add/Update Product, B = Remove Product): ");
         return input.toUpperCase();
     }
     handleA() {
+        this.context.transitionTo(new addProduct_1.AddProduct());
     }
     handleB() {
         let product = products_1.Product.getProductInstance();

@@ -1,6 +1,7 @@
 import { State } from "./state";
 import {question} from 'readline-sync';
 import { Product } from "./products";
+import { AddProduct } from "./addProduct";
 
 export class ProductConfig extends State {
   public handleSelect(): string {
@@ -10,7 +11,7 @@ export class ProductConfig extends State {
   }
 
   public handleA(): void {
-
+    this.context.transitionTo(new AddProduct());
   } 
 
   public handleB(): void {

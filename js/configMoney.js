@@ -4,7 +4,6 @@ const state_1 = require("./state");
 const readline_sync_1 = require("readline-sync");
 const configMoneyStore_1 = require("./configMoneyStore");
 const money_1 = require("./money");
-const configMode_1 = require("./configMode");
 class ConfigMoney extends state_1.State {
     handleSelect() {
         let input = readline_sync_1.question("Money Store Mode (A = Config Money Store, B = Money Store Inventory): ");
@@ -25,8 +24,8 @@ class ConfigMoney extends state_1.State {
             amount += item.value * allMoney[i].count;
             console.log(`${item.type}\t${item.value}\t\t${item.count}`);
         }
-        console.log(`\t Total amount ${amount} Tk. and Quantity of coins and notes are ${pc} Pcs.`);
-        this.context.transitionTo(new configMode_1.ConfigMode());
+        console.log(`\tTotal amount ${amount} Tk. and Quantity of coins and notes are ${pc} Pcs.`);
+        this.context.transitionTo(new ConfigMoney());
     }
 }
 exports.ConfigMoney = ConfigMoney;

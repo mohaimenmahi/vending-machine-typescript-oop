@@ -53,7 +53,7 @@ export class Product {
   }
 
   public removeProduct(code: string): any {
-    let list = Product.productList;
+    let list = [...Product.productList];
 
     let index = list.findIndex((item: any) => item.code === code)
 
@@ -63,11 +63,8 @@ export class Product {
       } else {
         list = list.filter((item: any) => item.code !== code)
       }
-
-      this.setProductList(list)
-
-      return list[index];
-    } else return null;
+    }
+    this.setProductList(list)
   }
 
   public deleteProduct(code: string): boolean {

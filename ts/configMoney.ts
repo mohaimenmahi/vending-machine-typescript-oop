@@ -33,8 +33,8 @@ export class ConfigMoney extends State {
 
       console.log(`${item.type}\t${item.value}\t\t${item.count}`)
     }
-    console.log(`\t Total amount ${amount} Tk. and Quantity of coins and notes are ${pc} Pcs.`);
+    console.log(`\tTotal amount ${amount} Tk. and Quantity of coins and notes are ${pc} Pcs.`);
 
-    this.context.transitionTo(new ConfigMode())
+    this.context.transitionTo(new ConfigMoney())
   }
 }

@@ -36,7 +36,7 @@ class Product {
         this.setProductList(list);
     }
     removeProduct(code) {
-        let list = Product.productList;
+        let list = [...Product.productList];
         let index = list.findIndex((item) => item.code === code);
         if (index >= 0) {
             if (list[index].count > 1) {
@@ -45,11 +45,8 @@ class Product {
             else {
                 list = list.filter((item) => item.code !== code);
             }
-            this.setProductList(list);
-            return list[index];
         }
-        else
-            return null;
+        this.setProductList(list);
     }
     deleteProduct(code) {
         let list = Product.productList;
