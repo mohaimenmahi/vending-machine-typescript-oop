@@ -13,7 +13,13 @@ The Vending Machine system code is written on TypeScript. Here are The documenta
 
 One needs **node js** installed in the Computer to run this code.
 
-After going to the directory `vending-machine/js`, run 
+After going to the directory `vending-machine`, run 
+
+`npm install`
+
+This will install all the dependencies needed to run the code.
+
+Then going to the directory `vending-machine/js`, run 
 
 `node main.js`
 
