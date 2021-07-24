@@ -9,7 +9,7 @@ After going to the directory `vending-machine/js`, run
 
 There will come a text:
 
-`Main Menu (A = Config Mode, B = Sale Mode):`
+**Main Menu (A = Config Mode, B = Sale Mode):**
 
 By input **A/B** and pressing enter the system will go to particular mode.
 
@@ -18,9 +18,8 @@ For coming back to the Main Menu from any mode or any stage, Please input **C** 
 
 If input is A, it will go to the money config mode, if input is B, it will go to the Money store inventory mode and if the input is **C**, the system will go to the Main Menu.
 
-`Money Store Mode (A = Config Money Store, B = Money Store Inventory): C ⏎
-
-Main Menu (A = Config Mode, B = Sale Mode):`
+**Money Store Mode (A = Config Money Store, B = Money Store Inventory): C ⏎**
+**Main Menu (A = Config Mode, B = Sale Mode):**
 
 While coming back to the Config Menu from Sale Menu, an user will need a secret code to enter in **Config Mode.**
 
@@ -29,14 +28,13 @@ The secret code is `admin123`. For simplicity, the secret code is not configurab
 # Add Money:
 For adding new money indexes in the system, an user must go to the **Add Money** mode via config mode. Here is given a sample input of 50 Taka note:
 
-`Type (Coin/Note): note ⏎
+**Type (Coin/Note): note ⏎
 Composition: PAPER ⏎
 Color: YELLOW ⏎
 Obverse: BB ⏎
 Reverse: TDM ⏎
 Value: 50 ⏎
-Count: 5 ⏎`
-
+Count: 5 ⏎**
 
 After adding successfully, there will be a Success message.
 If any of the inputs are invalid, an error message will be shown by the system.
@@ -45,10 +43,8 @@ If any of the inputs are invalid, an error message will be shown by the system.
 # Update Money:
 For updating the money index in the system, an user must go to the **Update Money** mode via config mode. Here is given a sample update of 50 Taka note:
 
-`
-Enter Code: PAPER-YELLOW-BB-TDM ⏎
-Enter Count: 12 ⏎
-`
+**Enter Code: PAPER-YELLOW-BB-TDM ⏎
+Enter Count: 12 ⏎**
 
 After updating successfully, there will be a Success message.
 If any of the inputs are invalid, an error message will be shown by the system.
