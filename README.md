@@ -7,8 +7,9 @@ After going to the directory `vending-machine/js`, run
 
 `node main.js`
 
-There will come a text
-`Main Menu (A = Config Mode, B = Sale Mode):`
+There will come a text:
+
+``Main Menu (A = Config Mode, B = Sale Mode):``
 
 By input **A/B** and pressing enter the system will go to particular mode.
 
@@ -17,8 +18,8 @@ For coming back to the Main Menu from any mode or any stage, Please input **C** 
 
 If input is A, it will go to the money config mode, if input is B, it will go to the Money store inventory mode and if the input is **C**, the system will go to the Main Menu.
 
-`Money Store Mode (A = Config Money Store, B = Money Store Inventory): C ⏎
-Main Menu (A = Config Mode, B = Sale Mode):`
+`Money Store Mode (A = Config Money Store, B = Money Store Inventory): C ⏎`
+`Main Menu (A = Config Mode, B = Sale Mode):`
 
 While coming back to the Config Menu from Sale Menu, an user will need a secret code to enter in **Config Mode.**
 
