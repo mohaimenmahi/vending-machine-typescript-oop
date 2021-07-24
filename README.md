@@ -6,7 +6,7 @@
 
 **Design Pattern Documentation PDF File:** `/documentation/Design Patterns.pdf`
 
-**Full UML Diagram:** `/ts_diagram.png`
+**Full UML Diagram:** `/docuementation/ts_diagram.png`
 
 # Introduction:
 The Vending Machine system code is written on TypeScript. Here are The documentation:
