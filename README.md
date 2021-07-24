@@ -1,3 +1,7 @@
+**Source Code Directory:** `/ts`
+
+**Compiled Code Directory:** `/js`
+
 **Code Documentation PDF File:** `/documentation/Code Documentation.pdf`
 
 **Design Pattern Documentation PDF File:** `/documentation/Design Patterns.pdf`
