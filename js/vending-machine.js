@@ -24,7 +24,7 @@ class VMContext {
         else if (option === 'B') {
             this.requestB();
         }
-        else {
+        else if (option === 'C') {
             this.transitionTo(new start_1.Start());
         }
     }

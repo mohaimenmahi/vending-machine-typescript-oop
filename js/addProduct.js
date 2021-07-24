@@ -6,18 +6,18 @@ const products_1 = require("./products");
 const validator_1 = require("./validator");
 class AddProduct extends state_1.State {
     handleSelect() {
-        let input = readline_sync_1.question("Product Settings (A = Add Product, B = Update Product):");
+        let input = readline_sync_1.question("Product Settings (A = Add Product, B = Update Product): ");
         return input.toUpperCase();
     }
     handleA() {
         let product = products_1.Product.getProductInstance();
         let name = readline_sync_1.question("Product Name: ");
-        name = validator_1.validConvert(name);
+        let checkName = validator_1.validConvert(name);
         let code = readline_sync_1.question("Product Code: ");
         code = validator_1.validConvert(code);
         let price = readline_sync_1.questionInt("Product Price: ");
         let count = readline_sync_1.questionInt("Product Count: ");
-        if (validator_1.isString(name) && validator_1.isString(code)) {
+        if (validator_1.isString(checkName) && validator_1.isString(code)) {
             let p1 = new Object({
                 name: name,
                 price: price,

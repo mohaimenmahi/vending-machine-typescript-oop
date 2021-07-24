@@ -6,7 +6,7 @@ import { isString, validConvert } from "./validator";
 
 export class AddProduct extends State {
   public handleSelect(): string {
-    let input: string = question("Product Settings (A = Add Product, B = Update Product):");
+    let input: string = question("Product Settings (A = Add Product, B = Update Product): ");
 
     return input.toUpperCase();
   }
@@ -15,7 +15,7 @@ export class AddProduct extends State {
     let product = Product.getProductInstance();
 
     let name: string = question("Product Name: ");
-    name = validConvert(name);
+    let checkName = validConvert(name);
 
     let code: string = question("Product Code: ");
     code = validConvert(code);
@@ -23,7 +23,7 @@ export class AddProduct extends State {
     let price: number = questionInt("Product Price: ");
     let count: number = questionInt("Product Count: ");
 
-    if(isString(name) && isString(code)) {
+    if(isString(checkName) && isString(code)) {
       let p1 = new Object({
         name: name,
         price: price,
