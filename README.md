@@ -1,5 +1,7 @@
 **Code Documentation PDF File:** `/documentation/Code Documentation.pdf`
+
 **Design Pattern Documentation PDF File:** `/documentation/Design Patterns.pdf`
+
 **Full UML Diagram:** `/ts_diagram.png`
 
 # Introduction:
