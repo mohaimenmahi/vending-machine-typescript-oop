@@ -1,5 +1,5 @@
 # bkash-oop-test
-Introduction:
+***Introduction:***
 The Vending Machine system code is written on TypeScript. Here are The documentation:
 
 One needs node js installed in the Computer to run this code.
@@ -13,7 +13,7 @@ Main Menu (A = Config Mode, B = Sale Mode):
 
 By input A/B and pressing enter the system will go to particular mode.
 
-Returning To Main Menu:
+***Returning To Main Menu:***
 For coming back to the Main Menu from any mode or any stage, Please input C on any input requesting field. As for example,
 
 If input is A, it will go to the money config mode, if input is B, it will go to the Money store inventory mode and if the input is C, the system will go to the Main Menu.
