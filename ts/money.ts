@@ -81,7 +81,10 @@ export class Money {
     )
 
     if(index >= 0) {
-      list[index].count = 0;
+      list = list.filter((item: any) => 
+        this.convertString(item) !== code.toUpperCase()
+      )
+      
       this.setStaticArray(list);
       return true;
     } else {
