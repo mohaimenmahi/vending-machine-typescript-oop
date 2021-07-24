@@ -1,5 +1,4 @@
-# bkash-oop-test
-***Introduction:***
+# Introduction:
 The Vending Machine system code is written on TypeScript. Here are The documentation:
 
 One needs node js installed in the Computer to run this code.
@@ -13,7 +12,7 @@ Main Menu (A = Config Mode, B = Sale Mode):
 
 By input A/B and pressing enter the system will go to particular mode.
 
-***Returning To Main Menu:***
+# Returning To Main Menu:
 For coming back to the Main Menu from any mode or any stage, Please input C on any input requesting field. As for example,
 
 If input is A, it will go to the money config mode, if input is B, it will go to the Money store inventory mode and if the input is C, the system will go to the Main Menu.
@@ -25,7 +24,7 @@ While coming back to the Config Menu from Sale Menu, an user will need a secret 
 
 The secret code is admin123. For simplicity, the secret code is not configurable. It is hardcoded in the system. 
 
-Add Money:
+# Add Money:
 For adding new money indexes in the system, an user must go to the Add Money mode via config mode. Here is given a sample input of 50 Taka note:
 
 Type (Coin/Note): note ⏎
@@ -41,7 +40,7 @@ After adding successfully, there will be a Success message.
 If any of the inputs are invalid, an error message will be shown by the system.
 
 
-Update Money:
+# Update Money:
 For updating the money index in the system, an user must go to the Update Money mode via config mode. Here is given a sample update of 50 Taka note:
 
 Enter Code: PAPER-YELLOW-BB-TDM ⏎
@@ -50,7 +49,7 @@ Enter Count: 12 ⏎
 After updating successfully, there will be a Success message.
 If any of the inputs are invalid, an error message will be shown by the system.
 
-Remove Money:
+# Remove Money:
 For removing money availability from the system, an user must go to the Remove Money mode via config mode. Here is given a sample to remove 50 Taka note:
 
 Enter Code: PAPER-YELLOW-BB-TDM ⏎
@@ -58,7 +57,7 @@ Enter Code: PAPER-YELLOW-BB-TDM ⏎
 After removing successfully, there will be a Success message.
 If any of the inputs are invalid, an error message will be shown by the system.
 
-Add Product:
+# Add Product:
 For adding a new product in the system, an user must go to the Add Product mode via config mode. Here is given a sample input of “Potato Chips”:
 
 Product Name: Potato Chips ⏎
@@ -69,7 +68,7 @@ Product Count: 5 ⏎
 After adding successfully, there will be a Success message.
 If any of the inputs are invalid, an error message will be shown by the system.
 
-Update Product:
+# Update Product:
 For updating the money index in the system, an user must go to the Update Product mode via config mode. Here is given a sample update of Potato Chips:
 
 Product Code: 501 ⏎
@@ -80,7 +79,7 @@ After updating successfully, there will be a Success message.
 If any of the inputs are invalid, an error message will be shown by the system.
 
 
-Remove Product:
+# Remove Product:
 For removing product availability from the system, an user must go to the Remove Product mode via config mode. Here is given a sample to remove of Potato Chips:
 
 Enter Product Code: 501
@@ -88,7 +87,7 @@ Enter Product Code: 501
 After removing successfully, there will be a Success message.
 If any of the inputs are invalid, an error message will be shown by the system.
 
-Sale Mode:
+# Sale Mode:
 
 A sample sale console operations example
 
